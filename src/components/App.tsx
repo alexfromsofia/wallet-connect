@@ -7,7 +7,7 @@ import Layout from "./Layout"
 
 const App = () => {
   const [state, setState] = useState<GlobalContextState>(initialState)
-
+  console.log(state)
   return (
     <GlobalContext.Provider value={{ state, setState }}>
       <Layout />

@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 
 const port = process.env.CLIENT_PORT || 3000
 const config = {
@@ -28,6 +29,7 @@ const config = {
   },
 
   plugins: [
+    new NodePolyfillPlugin(),
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: "./src/index.html",
