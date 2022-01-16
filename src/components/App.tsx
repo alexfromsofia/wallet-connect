@@ -1,41 +1,18 @@
-import { MetaMaskInpageProvider } from "@metamask/providers"
-import { Maybe } from "@metamask/providers/dist/utils"
-import React, { useEffect, useState } from "react"
-
-declare global {
-  interface Window {
-    ethereum: MetaMaskInpageProvider
-  }
-}
-
-const { ethereum } = window
-
-function connect() {}
-
-function handleAccountsChanged(acc: any) {
-  console.log(acc)
-}
+import React, { useState } from "react"
+import GlobalContext, {
+  GlobalContextState,
+  initialState,
+} from "../GlobalContext"
+import Layout from "./Layout"
 
 const App = () => {
-  const [connection, setConnection] = useState<Maybe<unknown>>()
+  const [state, setState] = useState<GlobalContextState>(initialState)
 
-  useEffect(() => {
-    ethereum
-      .request({ method: "eth_requestAccounts" })
-      .then((result) => {
-        setConnection(result)
-      })
-      .catch((error) => {
-        if (error.code === 4001) {
-          // EIP-1193 userRejectedRequest error
-          console.log("Please connect to MetaMask.")
-        } else {
-          console.error(error)
-        }
-      })
-  }, [])
-  console.log(connection)
-  return <div>App</div>
+  return (
+    <GlobalContext.Provider value={{ state, setState }}>
+      <Layout />
+    </GlobalContext.Provider>
+  )
 }
 
 export default App
