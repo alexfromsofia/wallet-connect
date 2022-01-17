@@ -28,6 +28,9 @@ export interface Token {
 }
 
 export const ETH: Token = {
+  /**
+   * If i'm correct ETH has no address?
+   */
   address: "",
   chainId: 1,
   decimals: 18,
@@ -45,7 +48,10 @@ export async function getTokensData() {
         from: web3Instance.eth.defaultAccount as string,
       })
       const memo = await acc
-
+      /**
+       * Some balances like NEXO, SEELE appear to be wrong.
+       * IMO this is due to a wrong abi provided, but I'm no block-chain expert (yet).
+       */
       const balance = await contract.methods.balanceOf(address).call()
       const totalSupply = await contract.methods.totalSupply().call()
 

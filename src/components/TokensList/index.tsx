@@ -37,7 +37,7 @@ const TokensList = () => {
       <iframe
         key={selectedToken}
         className={styles.iframe}
-        src={`https://app.uniswap.org/#/swap?outputCurrency=${selectedToken}`}
+        src={`https://app.uniswap.org/#/swap?theme=dark&outputCurrency=${selectedToken}`}
         height="660px"
         width="100%"
         style={{
