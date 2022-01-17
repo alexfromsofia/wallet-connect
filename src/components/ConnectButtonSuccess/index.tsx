@@ -12,7 +12,7 @@ const ConnectButtonSuccess = () => {
   return (
     <div className={styles.container}>
       <span className={styles.network}>{networkMap[chainId]}</span>
-      <span className={styles.button}>{address}</span>
+      <span className={styles.address}>{address}</span>
     </div>
   )
 }

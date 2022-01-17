@@ -44,3 +44,10 @@
 .iframe {
   grid-column-start: span 2;
 }
+
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -3,11 +3,14 @@ html {
   background-color: rgb(33, 36, 41);
 }
 
-body {
-}
-
 * {
   font-family: "Inter custom", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 .gradient {
