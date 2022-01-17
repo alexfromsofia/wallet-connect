@@ -1,0 +1,31 @@
+.container {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  background-color: rgb(25, 27, 31);
+  border-radius: 16px;
+  white-space: nowrap;
+  height: 40px;
+  width: auto;
+}
+
+.button {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 14px;
+  margin-right: 2px;
+  margin-left: 1px;
+  background-color: rgb(33, 36, 41);
+  border: 1px solid rgb(33, 36, 41);
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.eth-balance {
+  padding: 0 10px;
+}

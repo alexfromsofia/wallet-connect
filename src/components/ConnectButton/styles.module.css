@@ -1,0 +1,18 @@
+.button {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  background-color: rgba(21, 61, 111, 0.44);
+  border: 1px solid rgba(21, 61, 111, 0.44);
+  color: rgb(80, 144, 234);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 14px;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: default;
+}

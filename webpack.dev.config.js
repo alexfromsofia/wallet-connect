@@ -21,6 +21,20 @@ const config = {
         exclude: /node_modules/,
         use: ["ts-loader"],
       },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              importLoaders: 1,
+              sourceMap: true,
+            },
+          },
+        ],
+      },
     ],
   },
 

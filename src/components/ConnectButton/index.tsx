@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { useGlobalContext } from "../GlobalContext"
+import { useGlobalContext } from "../../GlobalContext"
+import styles from "./styles.module.css"
 
 const { ethereum } = window
 
@@ -14,20 +15,18 @@ const ConnectButton = () => {
         method: "eth_requestAccounts",
       })
 
-      setState({
-        ...state,
-        address,
-        isMetaMaskLinked: true,
-      })
+      setState({ ...state, address })
     } catch (error) {
-      console.error(error)
-    } finally {
       setDisabled(false)
     }
   }
 
   return (
-    <button disabled={disabled} onClick={handleClick}>
+    <button
+      className={`${styles.button} ${disabled ? styles.disabled : ""}`}
+      disabled={disabled}
+      onClick={handleClick}
+    >
       Connect MetaMask
     </button>
   )
