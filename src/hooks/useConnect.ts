@@ -1,11 +1,7 @@
 import { useEffect } from "react"
-import abi from "../data/erc20.abi.json"
-import allTokens from "../data/tokens.json"
 import { initialState, TokenById, useGlobalContext } from "../GlobalContext"
-import { ETH, Token } from "../utils"
+import { ETH, getTokensData, Network } from "../utils"
 import { ethereum, web3Instance } from "../web3Instance"
-
-const tokens = allTokens.tokens as Token[]
 
 const useConnect = () => {
   const { setState, state } = useGlobalContext()
@@ -21,24 +17,24 @@ const useConnect = () => {
       const [address]: any = await ethereum.request({ method: "eth_accounts" })
       const walletLinked = typeof address !== "undefined"
 
-      if (walletLinked) {
-        tokens.forEach(async (token) => {
-          const { address, symbol } = token
-          const contract = new web3Instance.eth.Contract(abi as any, address, {
-            from: web3Instance.eth.defaultAccount as string,
-          })
-
-          const balance = await contract.methods.balanceOf(address).call()
-
-          tokenIds.push(symbol)
-          tokensById[symbol] = { ...token, balance }
+      if (chainId !== Network[Network["0x1"]]) {
+        setState({
+          ...state,
+          error: "Please switch to Etherium Mainnet",
         })
+
+        return
+      }
+
+      if (walletLinked) {
         const balance = await web3Instance.eth.getBalance(address)
+        const { tokenIds: ids, tokensById: byId } = await getTokensData()
 
         tokenIds.push(ETH.symbol)
         tokensById[ETH.symbol] = {
           ...ETH,
           balance: Number(web3Instance.utils.fromWei(balance)),
+          totalSupply: 0,
         }
 
         setState({
@@ -47,8 +43,11 @@ const useConnect = () => {
           isMetaMaskLinked: walletLinked,
           chainId,
           address,
-          tokenIds,
-          tokensById,
+          tokenIds: [...tokenIds, ...ids],
+          tokensById: {
+            ...tokensById,
+            ...byId,
+          },
         })
       } else {
         setState({

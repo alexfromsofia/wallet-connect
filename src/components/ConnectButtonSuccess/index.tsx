@@ -1,30 +1,18 @@
 import React from "react"
 import { useGlobalContext } from "../../GlobalContext"
+import { networkMap } from "../../utils"
 import styles from "./styles.module.css"
-
-const formatAddress = (address: string) => {
-  const symbolCount = 5
-  const array = address.split("")
-
-  return `${array.slice(0, symbolCount).join("")}...${array
-    .slice(symbolCount * -1)
-    .join("")}`
-}
 
 const ConnectButtonSuccess = () => {
   const { state } = useGlobalContext()
-  const { address, tokensById } = state
+  const { address, tokensById, chainId } = state
 
-  if (!address || Object.keys(tokensById).length === 0) return null
-
-  const { balance, symbol } = tokensById["ETH"]
+  if (!chainId || !address || Object.keys(tokensById).length === 0) return null
 
   return (
     <div className={styles.container}>
-      <span className={styles["eth-balance"]}>
-        {balance} {symbol}
-      </span>
-      <button className={styles.button}>{formatAddress(address)}</button>
+      <span className={styles.network}>{networkMap[chainId]}</span>
+      <span className={styles.button}>{address}</span>
     </div>
   )
 }

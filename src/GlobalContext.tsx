@@ -1,10 +1,11 @@
 import React, { useContext } from "react"
-import { Network, Token } from "./utils"
+import { Token } from "./utils"
 import { ethereum } from "./web3Instance"
 
 export interface TokenById {
   [key: string]: Token & {
     balance: number
+    totalSupply: number
   }
 }
 
@@ -13,9 +14,10 @@ export interface GlobalContextState {
   isMetaMaskLinked: boolean
   hasMetaMask: boolean
   address?: string
-  chainId?: Network
+  chainId?: string
   tokensById: TokenById
   tokenIds: string[]
+  error?: string
 }
 
 export interface ContextProvider {

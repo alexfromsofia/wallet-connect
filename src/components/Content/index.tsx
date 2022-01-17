@@ -4,6 +4,7 @@ import useConnect from "../../hooks/useConnect"
 import ConnectButton from "../ConnectButton"
 import ConnectButtonSuccess from "../ConnectButtonSuccess"
 import Loader from "../Loader"
+import TokensList from "../TokensList"
 import styles from "./styles.module.css"
 
 const Content = () => {
@@ -18,8 +19,17 @@ const Content = () => {
   }
 
   return (
-    <div className={styles.buttons}>
-      {isMetaMaskLinked ? <ConnectButtonSuccess /> : <ConnectButton />}
+    <div className={styles.container}>
+      {isMetaMaskLinked ? (
+        <div>
+          <div>
+            <ConnectButtonSuccess />
+          </div>
+          <TokensList />
+        </div>
+      ) : (
+        <ConnectButton />
+      )}
     </div>
   )
 }
