@@ -1,11 +1,12 @@
 import { useEffect } from "react"
 import { initialState, TokenById, useGlobalContext } from "../GlobalContext"
-import { ETH, getTokensData, Network } from "../utils"
+import { errors, ETH, getTokensData, Network } from "../utils"
 import { ethereum, web3Instance } from "../web3Instance"
 
 const useConnect = () => {
   const { setState, state } = useGlobalContext()
   const { isMetaMaskLinked, address } = state
+
   useEffect(() => {
     const tokenIds: string[] = []
     const tokensById: TokenById = {}
@@ -20,7 +21,7 @@ const useConnect = () => {
       if (chainId !== Network[Network["0x1"]]) {
         setState({
           ...state,
-          error: "Please switch to Etherium Mainnet",
+          error: errors.network,
         })
 
         return
@@ -39,7 +40,7 @@ const useConnect = () => {
 
         setState({
           ...state,
-          isConnected: true,
+          isWeb3Ready: true,
           isMetaMaskLinked: walletLinked,
           chainId,
           address,
@@ -48,16 +49,23 @@ const useConnect = () => {
             ...tokensById,
             ...byId,
           },
+          error: undefined,
         })
       } else {
         setState({
           ...state,
-          isConnected: true,
+          isWeb3Ready: true,
+          error: undefined,
         })
       }
     }
 
-    getWalletData()
+    getWalletData().catch(() => {
+      setState({
+        ...initialState,
+        error: errors.general,
+      })
+    })
   }, [isMetaMaskLinked, address])
 
   useEffect(() => {
@@ -69,7 +77,7 @@ const useConnect = () => {
       if (!accounts || !accounts.length) {
         setState({
           ...initialState,
-          isConnected: true,
+          isWeb3Ready: true,
         })
       }
     })

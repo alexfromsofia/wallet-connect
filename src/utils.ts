@@ -13,6 +13,11 @@ export const networkMap: {
   [Network[Network["0x1"]]]: "Mainnet",
 }
 
+export const errors = {
+  network: "Please switch to Etherium Mainnet",
+  general: "Hello, this is our error message!",
+}
+
 export interface Token {
   chainId: number
   address: string

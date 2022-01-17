@@ -9,10 +9,8 @@
 }
 
 .address {
-  display: flex;
-  flex-flow: row nowrap;
+  display: initial;
   width: 100%;
-  -webkit-box-align: center;
   align-items: center;
   padding: 0.5rem;
   border-radius: 14px;
@@ -44,7 +42,6 @@
     white-space: nowrap;
     max-width: 200px;
     margin-left: auto;
-    display: initial;
   }
   .network {
     flex: none;

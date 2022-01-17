@@ -9,12 +9,12 @@ import styles from "./styles.module.css"
 
 const Content = () => {
   const {
-    state: { isConnected, isMetaMaskLinked },
+    state: { isWeb3Ready, isMetaMaskLinked },
   } = useGlobalContext()
 
   useConnect()
 
-  if (!isConnected) {
+  if (!isWeb3Ready) {
     return <Loader />
   }
 

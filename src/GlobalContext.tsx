@@ -10,7 +10,7 @@ export interface TokenById {
 }
 
 export interface GlobalContextState {
-  isConnected: boolean
+  isWeb3Ready: boolean
   isMetaMaskLinked: boolean
   hasMetaMask: boolean
   address?: string
@@ -26,7 +26,7 @@ export interface ContextProvider {
 }
 
 export const initialState: GlobalContextState = {
-  isConnected: false,
+  isWeb3Ready: false,
   isMetaMaskLinked: false,
   hasMetaMask: Boolean(ethereum && ethereum.isMetaMask),
   address: undefined,
